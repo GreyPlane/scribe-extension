@@ -1,6 +1,7 @@
 import sbt._
 
 lazy val ScribeVersion = "3.10.3"
+lazy val FabricVersion = "1.6.1"
 lazy val CirceVersion = "0.14.3"
 
 val publishSettings = List(
@@ -48,6 +49,15 @@ lazy val scribeExtendableJsonCirce = module("extendable-json-circe")
   )
   .dependsOn(scribeExtendableJson)
 
+lazy val scribeExtendableJsonFabric = module("extendable-json-fabric")
+  .settings(
+    libraryDependencies ++= Seq(
+      "com.outr" %% "fabric-core" % FabricVersion,
+      "com.outr" %% "fabric-io" % FabricVersion
+    )
+  )
+  .dependsOn(scribeExtendableJson)
+
 lazy val scribeExtendableJsonTesting =
   module("extendable-json-test")
     .settings(
@@ -56,17 +66,20 @@ lazy val scribeExtendableJsonTesting =
         "io.circe" %% "circe-core" % CirceVersion % Test,
         "io.circe" %% "circe-generic" % CirceVersion % Test,
         "io.circe" %% "circe-parser" % CirceVersion % Test,
+        "com.outr" %% "fabric-core" % FabricVersion % Test,
+        "com.outr" %% "fabric-io" % FabricVersion % Test,
         "org.scalatest" %% "scalatest" % "3.2.14" % Test
       )
     )
     .enablePlugins(NoPublishPlugin)
-    .dependsOn(scribeExtendableJson, scribeExtendableJsonCirce, scribeExtendableJsonEvent)
+    .dependsOn(scribeExtendableJson, scribeExtendableJsonCirce, scribeExtendableJsonFabric, scribeExtendableJsonEvent)
 
 lazy val scribeExtension = project
   .in(file("."))
   .aggregate(
     scribeExtendableJson,
     scribeExtendableJsonCirce,
+    scribeExtendableJsonFabric,
     scribeExtendableJsonEvent,
     scribeExtendableJsonTesting
   )
