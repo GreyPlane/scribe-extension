@@ -15,8 +15,7 @@ val publishSettings = List(
       url("https://github.com/GreyPlane")
     )
   ),
-  sonatypeCredentialHost := "s01.oss.sonatype.org",
-  sonatypeRepository := "https://s01.oss.sonatype.org/service/local"
+  tlSonatypeUseLegacyHost := false
 )
 
 ThisBuild / version := "0.1.0-SNAPSHOT"
