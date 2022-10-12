@@ -81,11 +81,11 @@ jobs:
 
       - name: Make target directories
         if: github.event_name != 'pull_request' && (startsWith(github.ref, 'refs/tags/v'))
-        run: mkdir -p target modules/extendable-json-test/target modules/extendable-json/target modules/extendable-json-fabric/target modules/extendable-json-circe/target modules/extendable-json-event/target project/target
+        run: mkdir -p modules/json-ext-event/target modules/json-ext/target target modules/json-ext-circe/target modules/json-ext-test/target modules/json-ext-fabric/target project/target
 
       - name: Compress target directories
         if: github.event_name != 'pull_request' && (startsWith(github.ref, 'refs/tags/v'))
-        run: tar cf targets.tar target modules/extendable-json-test/target modules/extendable-json/target modules/extendable-json-fabric/target modules/extendable-json-circe/target modules/extendable-json-event/target project/target
+        run: tar cf targets.tar modules/json-ext-event/target modules/json-ext/target target modules/json-ext-circe/target modules/json-ext-test/target modules/json-ext-fabric/target project/target
 
       - name: Upload target directories
         if: github.event_name != 'pull_request' && (startsWith(github.ref, 'refs/tags/v'))

@@ -33,33 +33,33 @@ def module(path: String): Project = {
   )
 }
 
-lazy val scribeExtendableJson = module("extendable-json").settings(
+lazy val scribeJsonExt = module("json-ext").settings(
   libraryDependencies ++= Seq(
     "com.outr" %% "scribe" % ScribeVersion
   )
 )
 
-lazy val scribeExtendableJsonEvent = module("extendable-json-event").dependsOn(scribeExtendableJson)
+lazy val scribeJsonExtEvent = module("json-ext-event").dependsOn(scribeJsonExt)
 
-lazy val scribeExtendableJsonCirce = module("extendable-json-circe")
+lazy val scribeJsonExtCirce = module("json-ext-circe")
   .settings(
     libraryDependencies ++= Seq(
       "io.circe" %% "circe-core" % CirceVersion
     )
   )
-  .dependsOn(scribeExtendableJson)
+  .dependsOn(scribeJsonExt)
 
-lazy val scribeExtendableJsonFabric = module("extendable-json-fabric")
+lazy val scribeJsonExtFabric = module("json-ext-fabric")
   .settings(
     libraryDependencies ++= Seq(
       "com.outr" %% "fabric-core" % FabricVersion,
       "com.outr" %% "fabric-io" % FabricVersion
     )
   )
-  .dependsOn(scribeExtendableJson)
+  .dependsOn(scribeJsonExt)
 
-lazy val scribeExtendableJsonTesting =
-  module("extendable-json-test")
+lazy val scribeJsonExtTesting =
+  module("json-ext-test")
     .settings(
       libraryDependencies ++= Seq(
         "com.outr" %% "scribe" % ScribeVersion % Test,
@@ -72,14 +72,14 @@ lazy val scribeExtendableJsonTesting =
       )
     )
     .enablePlugins(NoPublishPlugin)
-    .dependsOn(scribeExtendableJson, scribeExtendableJsonCirce, scribeExtendableJsonFabric, scribeExtendableJsonEvent)
+    .dependsOn(scribeJsonExt, scribeJsonExtCirce, scribeJsonExtFabric, scribeJsonExtEvent)
 
-lazy val scribeExtension = project
+lazy val scribeExt = project
   .in(file("."))
   .aggregate(
-    scribeExtendableJson,
-    scribeExtendableJsonCirce,
-    scribeExtendableJsonFabric,
-    scribeExtendableJsonEvent,
-    scribeExtendableJsonTesting
+    scribeJsonExt,
+    scribeJsonExtCirce,
+    scribeJsonExtFabric,
+    scribeJsonExtEvent,
+    scribeJsonExtTesting
   )
