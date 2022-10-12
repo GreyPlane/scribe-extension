@@ -19,7 +19,7 @@ val publishSettings = List(
   tlSonatypeUseLegacyHost := false
 )
 
-ThisBuild / version := "0.1.0-SNAPSHOT"
+ThisBuild / version := "0.1.0"
 
 ThisBuild / scalaVersion := "2.13.8"
 
