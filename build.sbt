@@ -75,6 +75,7 @@ lazy val scribeJsonExtTesting =
     .dependsOn(scribeJsonExt, scribeJsonExtCirce, scribeJsonExtFabric, scribeJsonExtEvent)
 
 lazy val scribeExt = project
+  .enablePlugins(NoPublishPlugin)
   .in(file("."))
   .aggregate(
     scribeJsonExt,
