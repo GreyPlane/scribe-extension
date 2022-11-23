@@ -1,7 +1,7 @@
 import sbt._
 
-lazy val ScribeVersion = "3.10.3"
-lazy val FabricVersion = "1.6.1"
+lazy val ScribeVersion = "3.10.5"
+lazy val FabricVersion = "1.7.0"
 lazy val CirceVersion = "0.14.3"
 
 val publishSettings = List(

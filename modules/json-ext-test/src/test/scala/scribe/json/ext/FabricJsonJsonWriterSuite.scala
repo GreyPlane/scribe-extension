@@ -12,12 +12,17 @@ import scribe.json.fabric._
 import java.time.OffsetDateTime
 import java.time.format.DateTimeFormatter.ISO_OFFSET_DATE_TIME
 
-class FabricJsonJsonWriterSuite extends AnyFlatSpec with Matchers with Inside with BeforeAndAfterEach with JsonWriterSuite {
+class FabricJsonJsonWriterSuite
+    extends AnyFlatSpec
+    with Matchers
+    with Inside
+    with BeforeAndAfterEach
+    with JsonWriterSuite {
 
   implicit val offsetDateTimeRW: RW[OffsetDateTime] =
-    RW.apply(_.format(ISO_OFFSET_DATE_TIME).json, js => OffsetDateTime.parse(js.asString))
+    RW.from(_.format(ISO_OFFSET_DATE_TIME).json, js => OffsetDateTime.parse(js.asString))
 
-  implicit val rw: RW[LogstashRecord] = ccRW[LogstashRecord]
+  implicit val rw: RW[LogstashRecord] = RW.gen[LogstashRecord]
 
   val logstashRecordWriter = new ExtendableJsonWriter[LogstashRecord](cache, Map("service" -> "test"))
 
